@@ -11,10 +11,19 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
-
+    var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        window = UIWindow(frame: UIScreen.main.bounds)
+        startFlow()
         return true
+    }
+    
+    func startFlow() {
+        let vc = RecipesRouter.createModule()
+        
+        window?.rootViewController = vc
+        window?.makeKeyAndVisible()
     }
 
 }
