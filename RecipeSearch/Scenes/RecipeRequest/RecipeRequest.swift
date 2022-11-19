@@ -41,7 +41,7 @@ enum RecipesRequest: RequestProtocol {
         case .list(let from, let searchText, let healthText,let healthValue):
             return[
                 "from" : from,
-                "q" : "s",
+                "q" : searchText,
                 "app_id" : "3e6494ff",
                 "app_key": "aa2e9a8440724b8aba85b68b5a911a1d",
                 healthValue : healthText,

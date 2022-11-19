@@ -9,13 +9,14 @@ import Foundation
 
 
 class RecipesInteractor:RecipesInteractorInputProtocol{
-  
     
     var presenter: RecipesInteractorOutputProtocol?
     var repository: RecipesInteractorToRepositoryProtocol
+    var storge: getSearchSuggestionProtocol
     
-    init( repository: RecipesInteractorToRepositoryProtocol) {
+    init( repository: RecipesInteractorToRepositoryProtocol,storge:getSearchSuggestionProtocol) {
           self.repository = repository
+          self.storge = storge
      }
     
     func getRecipes(searchText: String, from: Int, health: String) {
@@ -24,6 +25,7 @@ class RecipesInteractor:RecipesInteractorInputProtocol{
             switch result {
             case.success(let recipe):
                 self?.presenter?.recipesSuccess(Recipes: recipe)
+                self?.storge.saveSearch(text: searchText)
             case.failure(let error):
                 self?.presenter?.recipesFail(message: error.localizedDescription)
             }

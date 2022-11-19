@@ -36,6 +36,10 @@
 		847866DE29295EC4000ABAA8 /* HealthFiltterCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847866DC29295EC4000ABAA8 /* HealthFiltterCollectionCell.swift */; };
 		847866DF29295EC4000ABAA8 /* HealthFiltterCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 847866DD29295EC4000ABAA8 /* HealthFiltterCollectionCell.xib */; };
 		847866E1292960CB000ABAA8 /* UicollectionView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847866E0292960CB000ABAA8 /* UicollectionView+Extentions.swift */; };
+		847866E329297CFD000ABAA8 /* ResultTabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847866E229297CFD000ABAA8 /* ResultTabelView.swift */; };
+		847866E529298199000ABAA8 /* SearchStorge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847866E429298199000ABAA8 /* SearchStorge.swift */; };
+		847866E729298334000ABAA8 /* SearchView+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847866E629298334000ABAA8 /* SearchView+TableView.swift */; };
+		847866E92929838A000ABAA8 /* RecipeView+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847866E82929838A000ABAA8 /* RecipeView+CollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +76,10 @@
 		847866DC29295EC4000ABAA8 /* HealthFiltterCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthFiltterCollectionCell.swift; sourceTree = "<group>"; };
 		847866DD29295EC4000ABAA8 /* HealthFiltterCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HealthFiltterCollectionCell.xib; sourceTree = "<group>"; };
 		847866E0292960CB000ABAA8 /* UicollectionView+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UicollectionView+Extentions.swift"; sourceTree = "<group>"; };
+		847866E229297CFD000ABAA8 /* ResultTabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTabelView.swift; sourceTree = "<group>"; };
+		847866E429298199000ABAA8 /* SearchStorge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStorge.swift; sourceTree = "<group>"; };
+		847866E629298334000ABAA8 /* SearchView+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchView+TableView.swift"; sourceTree = "<group>"; };
+		847866E82929838A000ABAA8 /* RecipeView+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipeView+CollectionView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +207,9 @@
 			children = (
 				847866BA29291609000ABAA8 /* RecipeView.swift */,
 				847866BB29291609000ABAA8 /* RecipeView.xib */,
+				847866E229297CFD000ABAA8 /* ResultTabelView.swift */,
+				847866E629298334000ABAA8 /* SearchView+TableView.swift */,
+				847866E82929838A000ABAA8 /* RecipeView+CollectionView.swift */,
 			);
 			path = RecipeSearchView;
 			sourceTree = "<group>";
@@ -248,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				847866D429292C74000ABAA8 /* RecipesInterector.swift */,
+				847866E429298199000ABAA8 /* SearchStorge.swift */,
 			);
 			path = RecipeInteractor;
 			sourceTree = "<group>";
@@ -404,6 +416,7 @@
 				847866C62929216A000ABAA8 /* RecipeModel.swift in Sources */,
 				847866D2292924A6000ABAA8 /* RecipePresenter.swift in Sources */,
 				847866C92929222C000ABAA8 /* RecipeRequest.swift in Sources */,
+				847866E329297CFD000ABAA8 /* ResultTabelView.swift in Sources */,
 				847866CC2929229F000ABAA8 /* RecipeRepository.swift in Sources */,
 				847866E1292960CB000ABAA8 /* UicollectionView+Extentions.swift in Sources */,
 				847866DA29295C7D000ABAA8 /* HealthFilterModel.swift in Sources */,
@@ -411,7 +424,10 @@
 				847866A22926DA32000ABAA8 /* APICleint.swift in Sources */,
 				847866AC2926DAD1000ABAA8 /* Localization.swift in Sources */,
 				847866D829293878000ABAA8 /* RecipeRouter.swift in Sources */,
+				847866E529298199000ABAA8 /* SearchStorge.swift in Sources */,
 				847866DE29295EC4000ABAA8 /* HealthFiltterCollectionCell.swift in Sources */,
+				847866E729298334000ABAA8 /* SearchView+TableView.swift in Sources */,
+				847866E92929838A000ABAA8 /* RecipeView+CollectionView.swift in Sources */,
 				847866A02926DA18000ABAA8 /* APICleintProtocols.swift in Sources */,
 				847866CF2929233E000ABAA8 /* RecipesProtocol.swift in Sources */,
 				847866B52926DB60000ABAA8 /* ReusableUIView+Extension.swift in Sources */,

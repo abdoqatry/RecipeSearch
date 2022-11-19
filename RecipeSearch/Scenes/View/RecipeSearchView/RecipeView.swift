@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecipeView: UIViewController {
+class RecipeView: UIViewController, UISearchResultsUpdating {
 
     
     @IBOutlet weak var recipeTabelView: UITableView!{
@@ -27,98 +27,137 @@ class RecipeView: UIViewController {
     }
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    var searchController : UISearchController!
+    
+    /// The search results table view.
+    var resultsTableController: ResultsTableController!
   
     var presenter: RecipesPresenterProtocol!
     let cellHeight = 140.0
     var currentSelected = -1
+    var health = "All"
+    var searchText = ""
+    
+//    let searchProtcol = searchStorge()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.getRecipe(searchText: "s", from: 10, health: "")
+       
+        searchTextSetup()
     }
     
     
-    
-    
-
-}
-
-
-
-extension RecipeView: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter.recipeNumberOfRows
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: RecipeTabelViewCell = recipeTabelView.dequeueReusableCell(forIndexPath: indexPath)
-        presenter.configureRecipeCell(cell: cell, index: indexPath.row)
+    func searchTextSetup(){
         
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        let lastItem = (recipes?.hits.count ?? 0) - 1
-//        if indexPath.item == lastItem{
-//            if recipes?.more == true {
-//                interactor?.fetchAllRecipes(searchText: searchTF.searchBar.text ?? "", from: from + 10, health: healthValue, healthKey: healthValue)
-//            }
-//        }
+        resultsTableController = ResultsTableController()
+        resultsTableController.suggestedSearchDelegate = self // So we can be notified when a suggested search token is selected.
+        searchController = UISearchController(searchResultsController: resultsTableController)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Type something here to search"
+        navigationItem.searchController = searchController
         
+        // Monitor when the search controller is presented and dismissed.
+        searchController.delegate = self
+
+        // Monitor when the search button is tapped, and start/end editing.
+        searchController.searchBar.delegate = self
+        
+        
+        /** Specify that this view controller determines how the search controller is presented.
+            The search controller should be presented modally and match the physical size of this view controller.
+        */
+        definesPresentationContext = true
     }
     
     
-    
-    
-}
-
-
-extension RecipeView: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeight
-    }
-}
-
-extension RecipeView: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        presenter.filterHealthNumberOfRows
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: HealthFiltterCollectionCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-        if currentSelected == indexPath.row{
-            cell.titleLabel.backgroundColor = .red
-        }else{
-            cell.titleLabel.backgroundColor = .gray
+    func setToSuggestedSearches() {
+        // Show suggested searches only if we don't have a search token in the search field.
+        if searchController.searchBar.searchTextField.tokens.isEmpty {
+            resultsTableController.showSuggestedSearches = true
+            
+            // We are no longer interested in cell navigating, since we are now showing the suggested searches.
+            resultsTableController.tableView.delegate = resultsTableController
         }
-        presenter.configureFilterCell(cell: cell, index: indexPath.row)
-        
-        
-        return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        //add here
-        let selectedIndexPath = IndexPath(item: 0, section: 0)
-        collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: [])
+    @objc func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+          print(text)
     }
-    
     
 }
 
-extension RecipeView: UICollectionViewDelegate {
+
+
+extension RecipeView: SuggestedSearch {
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        currentSelected = indexPath.row
-        healthCollectionView.reloadData()
-        presenter.selectfilterCell(index: indexPath.row, searchText: "s")
+    // ResultsTableController selected a suggested search, so we need to apply the search token.
+    func didSelectSuggestedSearch(text: NSAttributedString) {
+        if let searchField = navigationItem.searchController?.searchBar.searchTextField {
+//            searchField.insertToken(token, at: 0)
+            searchField.attributedText = text
+            
+            // Hide the suggested searches now that we have a token.
+            resultsTableController.showSuggestedSearches = false
+            
+            // Update the search query with the newly inserted token.
+            updateSearchResults(for: searchController)
+        }
     }
     
-    
-    
 }
+
+extension RecipeView: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text!.isEmpty {
+            // Text is empty, show suggested searches again.
+            setToSuggestedSearches()
+        } else {
+            resultsTableController.showSuggestedSearches = false
+        }
+    }
+   
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        // User tapped the Done button in the keyboard.
+        searchController.dismiss(animated: true, completion: nil)
+        //Save array to UserDefaults and add picked image url to the array
+        guard let text = searchBar.text , text != "" else {
+            return
+        }
+        searchText = text
+        presenter.getRecipe(searchText: searchText, from: 10, health: health)
+//        searchProtcol.saveSearch(text: text)
+//        let urls = searchProtcol.getSearchArray()
+//        searchProtcol.removeSearch()
+        searchBar.text = ""
+       
+    }
+
+}
+
+
+// MARK: - UISearchControllerDelegate
+
+extension RecipeView: UISearchControllerDelegate {
+    
+    //  show suggested searches.
+    func presentSearchController(_ searchController: UISearchController) {
+        searchController.showsSearchResultsController = true
+        setToSuggestedSearches()
+    }
+    
+//    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//        let newLength: Int = searchBar.text!.count + text.count - range.length
+//        let EnglishLetter = NSCharacterSet.init(charactersIn: "aqwertyuiopsdfghjklzxcvbQWERTYUIOPASDFGHJKLZXCVBNM ").inverted
+//        let strValid = text.rangeOfCharacter(from: EnglishLetter) == nil
+//               return (strValid && (newLength <= 40))
+//
+//    }
+}
+
 
 extension RecipeView :RecipesViewProtocol {
     

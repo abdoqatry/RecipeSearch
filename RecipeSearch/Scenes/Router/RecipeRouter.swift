@@ -14,7 +14,8 @@ class RecipesRouter:RecipesRouterProtocol{
     static func createModule() -> UIViewController {
         let view = RecipeView()
         let recipesRepository = RecipesRepository(apiClient: APICleint.shared)
-        let interactor = RecipesInteractor(repository: recipesRepository)
+        let storge = searchStorge()
+        let interactor = RecipesInteractor(repository: recipesRepository, storge: storge)
            let router = RecipesRouter()
            let presenter = RecipePresenter(view: view, interactor: interactor, router: router) // dependency injection constructor Base
            view.presenter = presenter // property base dependencyInjection
