@@ -19,7 +19,8 @@ class RecipesInteractor:RecipesInteractorInputProtocol{
      }
     
     func getRecipes(searchText: String, from: Int, health: String) {
-        repository.getRecipesList(searchText: searchText, from: from, health: health) {  [weak self] result in
+        let healthValue = validateHealthfilter(text: health)
+        repository.getRecipesList(searchText: searchText, from: from, health: health,healthValue:healthValue) {  [weak self] result in
             switch result {
             case.success(let recipe):
                 self?.presenter?.recipesSuccess(Recipes: recipe)
@@ -27,6 +28,13 @@ class RecipesInteractor:RecipesInteractorInputProtocol{
                 self?.presenter?.recipesFail(message: error.localizedDescription)
             }
         }
+    }
+    
+    func validateHealthfilter(text:String)-> String{
+        if text == "All" || text == "" {
+            return ""
+        }
+        return "health"
     }
     
     

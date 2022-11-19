@@ -10,15 +10,14 @@ import Foundation
 
 struct RecipeModel: Model {
     let from : Int
-    let more : Bool
     let hits: [Hits]
     
 }
     struct Hits : Model{
-        let recipe : hits
+        let recipe : Recipe
     }
 
-    struct hits: Model {
+    struct Recipe: Model {
         
         let label: String
         let image : String

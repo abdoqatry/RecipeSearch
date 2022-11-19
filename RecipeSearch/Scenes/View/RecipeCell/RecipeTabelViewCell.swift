@@ -26,6 +26,7 @@ class RecipeTabelViewCell: UITableViewCell,Reuseable {
 //        if let url = URL(string: viewModel.recipe.image){
 //            recipeImage.kf.setImage(with:url)
 //        }
+        recipeImage.load(with: viewModel.recipe.image)
     }
     
 }

@@ -21,15 +21,17 @@ protocol RecipesViewProtocol:AnyObject { // viewController
 }
 protocol RecipesPresenterProtocol: AnyObject {
     var view:RecipesViewProtocol? { get set }
-    var numberOfRows: Int { get }
-     func getRecipe(searchText: String, from: Int, health: String)
-   func configure(cell:RecipeTabelViewCell,index:Int)
-   
+    var recipeNumberOfRows: Int { get }
+    var filterHealthNumberOfRows: Int { get }
+    func getRecipe(searchText: String, from: Int, health: String)
+    func configureRecipeCell(cell:RecipeTabelViewCell,index:Int)
+    func configureFilterCell(cell:HealthFiltterCollectionCell,index:Int)
+    func selectfilterCell(index:Int,searchText:String)
 }
 
 // Repository protocol
 protocol RecipesInteractorToRepositoryProtocol {
-    func getRecipesList(searchText: String, from: Int, health: String, compeletion: @escaping (Result<RecipeModel, CustomNetworkError>) -> Void)
+    func getRecipesList(searchText: String, from: Int, health: String ,healthValue:String,compeletion: @escaping (Result<RecipeModel, CustomNetworkError>) -> Void)
 }
 
 protocol RecipesRepositoryProtocol: RecipesInteractorToRepositoryProtocol {

@@ -21,19 +21,36 @@ class RecipePresenter{
         self.router = router
     }
     
-    var numberOfRows: Int {
+    var recipeNumberOfRows: Int {
         return recipesList.count
+    }
+    
+    var filterHealthNumberOfRows: Int {
+        return HealthFiltterModel.damyHealthFilter.count
     }
 }
 
 extension  RecipePresenter:RecipesPresenterProtocol,RecipesInteractorOutputProtocol {
+    
+    func selectfilterCell(index: Int,searchText:String) {
+        let name = HealthFiltterModel.damyHealthFilter[index].name
+        
+        getRecipe(searchText: searchText, from: 1, health: name)
+    }
+    
+    
+    func configureFilterCell(cell: HealthFiltterCollectionCell, index: Int) {
+        let data = HealthFiltterModel.damyHealthFilter[index]
+        cell.configure(viewModel: data)
+    }
+    
     
     func getRecipe(searchText: String, from: Int, health: String) {
         view?.showLoadingIndicator()
         interactor.getRecipes(searchText: searchText, from: from, health: health)
     }
     
-    func configure(cell: RecipeTabelViewCell, index: Int) {
+    func configureRecipeCell(cell: RecipeTabelViewCell, index: Int) {
         let data = recipesList[index]
         cell.configure(viewModel: data)
     }

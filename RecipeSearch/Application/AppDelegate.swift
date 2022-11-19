@@ -21,8 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func startFlow() {
         let vc = RecipesRouter.createModule()
-        
-        window?.rootViewController = vc
+        window?.rootViewController = UINavigationController(rootViewController: vc)
         window?.makeKeyAndVisible()
     }
 

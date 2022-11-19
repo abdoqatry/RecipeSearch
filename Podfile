@@ -7,5 +7,6 @@ target 'RecipeSearch' do
 
   # Pods for RecipeSearch
 pod 'Alamofire', '~> 5.2'
+pod 'AlamofireImage'
 
 end
