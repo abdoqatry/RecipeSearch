@@ -20,19 +20,6 @@ extension RecipeView: UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        let lastItem = (recipes?.hits.count ?? 0) - 1
-//        if indexPath.item == lastItem{
-//            if recipes?.more == true {
-//                interactor?.fetchAllRecipes(searchText: searchTF.searchBar.text ?? "", from: from + 10, health: healthValue, healthKey: healthValue)
-//            }
-//        }
-        
-    }
-    
-    
-    
-    
 }
 
 
