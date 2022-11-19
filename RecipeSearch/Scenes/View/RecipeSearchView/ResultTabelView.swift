@@ -23,13 +23,20 @@ class ResultsTableController: UITableViewController {
         return suggestedSearches[fromIndex]
     }
     
+    override func viewDidLoad() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceived(_:)), name: NSNotification.Name(rawValue: "addNewSearch"), object: nil)
+    }
+    
     // Your delegate to receive suggested search tokens.
     weak var suggestedSearchDelegate: SuggestedSearch?
     
     // MARK: - UITableViewDataSource
     
-    static let suggestedSearches = searchStorge().getSearchArray()
+    static var suggestedSearches = searchStorge().getSearchArray()
 
+    @objc func methodOfReceived(_ notification: NSNotification) {
+        ResultsTableController.suggestedSearches = searchStorge().getSearchArray()
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ResultsTableController.suggestedSearches.count
@@ -39,12 +46,6 @@ class ResultsTableController: UITableViewController {
         return showSuggestedSearches ? NSLocalizedString("Suggested Searches", comment: "") : ""
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let destinationViewController = segue.destination as? DetailViewController {
-//            destinationViewController.product = filteredProducts[tableView.indexPathForSelectedRow!.row]
-//        }
-//    }
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: ResultsTableController.productCellIdentifier)
 

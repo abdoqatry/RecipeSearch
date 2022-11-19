@@ -12,17 +12,13 @@ protocol getSearchSuggestionProtocol{
 
     func saveSearch(text:String)
     func getSearchArray()->[String]
+    func removeSearch()
 }
 
 struct searchStorge  {
     
     private let searchArray = "suggestedArray"
     private let defaults = UserDefaults.standard
-    
-    func removeSearch(){
-        defaults.set(nil, forKey: searchArray)
-        defaults.synchronize()
-    }
     
 }
 
@@ -31,16 +27,22 @@ extension  searchStorge : getSearchSuggestionProtocol {
     
     func saveSearch(text:String){
        var urls = defaults.stringArray(forKey: searchArray) ?? []
-//        if text != "" && urls.count <= 10 {
+        if  urls.count <= 10 {
+            urls.remove(at: 0)
        urls.append(text)
        defaults.set(urls, forKey: searchArray)
-        defaults.synchronize()
-//        }
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addNewSearch"), object: nil)
+        }
    }
    
    func getSearchArray()-> [String]{
        let urls = defaults.stringArray(forKey: searchArray) ?? [String]()
        
-       return urls
+       return urls.reversed()
    }
+    
+    func removeSearch(){
+        defaults.set(nil, forKey: searchArray)
+        
+    }
 }
