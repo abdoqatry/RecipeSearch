@@ -30,6 +30,8 @@ class RecipeView: UIViewController, UISearchResultsUpdating {
     
     var searchController : UISearchController!
     
+    var nodata : UIImageView!
+    
     /// The search results table view.
     var resultsTableController: ResultsTableController!
   
@@ -43,7 +45,6 @@ class RecipeView: UIViewController, UISearchResultsUpdating {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         searchTextSetup()
     }
     
@@ -117,6 +118,7 @@ extension RecipeView: UISearchBarDelegate {
             setToSuggestedSearches()
         } else {
             resultsTableController.showSuggestedSearches = false
+            
         }
     }
    
@@ -129,9 +131,6 @@ extension RecipeView: UISearchBarDelegate {
         }
         searchText = text
         presenter.getRecipe(searchText: searchText, from: 10, health: health)
-//        searchProtcol.saveSearch(text: text)
-//        let urls = searchProtcol.getSearchArray()
-//        searchProtcol.removeSearch()
         searchBar.text = ""
        
     }
@@ -149,13 +148,13 @@ extension RecipeView: UISearchControllerDelegate {
         setToSuggestedSearches()
     }
     
-//    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-//        let newLength: Int = searchBar.text!.count + text.count - range.length
-//        let EnglishLetter = NSCharacterSet.init(charactersIn: "aqwertyuiopsdfghjklzxcvbQWERTYUIOPASDFGHJKLZXCVBNM ").inverted
-//        let strValid = text.rangeOfCharacter(from: EnglishLetter) == nil
-//               return (strValid && (newLength <= 40))
-//
-//    }
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let newLength: Int = searchBar.text!.count + text.count - range.length
+        let EnglishLetter = NSCharacterSet.init(charactersIn: "aqwertyuiopsdfghjklzxcvbQWERTYUIOPASDFGHJKLZXCVBNM\n").inverted
+        let strValid = text.rangeOfCharacter(from: EnglishLetter) == nil
+               return (strValid && (newLength <= 40))
+
+    }
 }
 
 

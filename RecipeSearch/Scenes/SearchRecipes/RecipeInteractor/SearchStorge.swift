@@ -26,19 +26,21 @@ struct searchStorge  {
 extension  searchStorge : getSearchSuggestionProtocol {
     
     func saveSearch(text:String){
-       var urls = defaults.stringArray(forKey: searchArray) ?? []
-        if  urls.count <= 10 {
-            urls.remove(at: 0)
-       urls.append(text)
-       defaults.set(urls, forKey: searchArray)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addNewSearch"), object: nil)
+       var resultArray = defaults.stringArray(forKey: searchArray) ?? []
+        if  resultArray.count >= 4 {
+            resultArray.remove(at: 0)
         }
+       resultArray.append(text)
+       defaults.set(resultArray, forKey: searchArray)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addNewSearch"), object: nil)
+        
+        
    }
    
    func getSearchArray()-> [String]{
-       let urls = defaults.stringArray(forKey: searchArray) ?? [String]()
+       let resultArray = defaults.stringArray(forKey: searchArray) ?? [String]()
        
-       return urls.reversed()
+       return resultArray.reversed()
    }
     
     func removeSearch(){
