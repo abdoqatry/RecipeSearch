@@ -5,10 +5,10 @@
 //  Created by Admin on 19/11/2022.
 //
 
-import Foundation
+import UIKit
 
-protocol RecipesRouterProtocol {
-   
+protocol RecipesRouterProtocol:AnyObject {
+    func createModule2() -> UIViewController
 }
 
 // presenter Protocol
@@ -18,6 +18,7 @@ protocol RecipesViewProtocol:AnyObject { // viewController
     func hideLoadingIndicator()
     func recipeSuccefully()
     func recipeFail(message:String)
+    func goToRecipeDetails(vc:UIViewController)
 }
 protocol RecipesPresenterProtocol: AnyObject {
     var view:RecipesViewProtocol? { get set }
@@ -27,6 +28,7 @@ protocol RecipesPresenterProtocol: AnyObject {
     func configureRecipeCell(cell:RecipeTabelViewCell,index:Int)
     func configureFilterCell(cell:HealthFiltterCollectionCell,index:Int)
     func selectfilterCell(index:Int,searchText:String)
+    func selectRecipeCell(index:Int,RecipeId:Int)
 }
 
 // Repository protocol

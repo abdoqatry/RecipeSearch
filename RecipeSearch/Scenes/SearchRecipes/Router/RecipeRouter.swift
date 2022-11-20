@@ -8,7 +8,7 @@
 import UIKit
 
 
-class RecipesRouter:RecipesRouterProtocol{
+class RecipesRouter{
     
     weak var viewController: UIViewController?
     static func createModule() -> UIViewController {
@@ -23,4 +23,24 @@ class RecipesRouter:RecipesRouterProtocol{
            router.viewController = view
            return view
     }
+    
+    
+}
+
+
+extension RecipesRouter :RecipesRouterProtocol {
+    
+    func createModule2() -> UIViewController {
+        let view = RecipeDetailsView()
+//        let recipesRepository = RecipesRepository(apiClient: APICleint.shared)
+//        let storge = searchStorge()
+//        let interactor = RecipesInteractor(repository: recipesRepository, storge: storge)
+           let router = RecipesRouter()
+//           let presenter = RecipePresenter(view: view, interactor: interactor, router: router) // dependency injection constructor Base
+//           view.presenter = presenter // property base dependencyInjection
+//           interactor.presenter = presenter
+           router.viewController = view
+           return view
+    }
+    
 }

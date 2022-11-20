@@ -32,6 +32,12 @@ class RecipePresenter{
 
 extension  RecipePresenter:RecipesPresenterProtocol,RecipesInteractorOutputProtocol {
     
+    func selectRecipeCell(index: Int, RecipeId: Int) {
+        let vc = router.createModule2()
+        view?.goToRecipeDetails(vc: vc)
+    }
+    
+    
     func selectfilterCell(index: Int,searchText:String) {
         let name = HealthFiltterModel.damyHealthFilter[index].name
         

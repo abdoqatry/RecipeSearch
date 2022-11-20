@@ -20,6 +20,10 @@ extension RecipeView: UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter.selectRecipeCell(index: indexPath.row, RecipeId: 1)
+    }
+    
 }
 
 

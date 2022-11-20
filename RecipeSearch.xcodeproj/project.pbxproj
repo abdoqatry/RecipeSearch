@@ -40,6 +40,8 @@
 		847866E529298199000ABAA8 /* SearchStorge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847866E429298199000ABAA8 /* SearchStorge.swift */; };
 		847866E729298334000ABAA8 /* SearchView+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847866E629298334000ABAA8 /* SearchView+TableView.swift */; };
 		847866E92929838A000ABAA8 /* RecipeView+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847866E82929838A000ABAA8 /* RecipeView+CollectionView.swift */; };
+		847866EF2929A135000ABAA8 /* RecipeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847866ED2929A135000ABAA8 /* RecipeDetailsView.swift */; };
+		847866F02929A135000ABAA8 /* RecipeDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 847866EE2929A135000ABAA8 /* RecipeDetailsView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +82,8 @@
 		847866E429298199000ABAA8 /* SearchStorge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStorge.swift; sourceTree = "<group>"; };
 		847866E629298334000ABAA8 /* SearchView+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchView+TableView.swift"; sourceTree = "<group>"; };
 		847866E82929838A000ABAA8 /* RecipeView+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipeView+CollectionView.swift"; sourceTree = "<group>"; };
+		847866ED2929A135000ABAA8 /* RecipeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsView.swift; sourceTree = "<group>"; };
+		847866EE2929A135000ABAA8 /* RecipeDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipeDetailsView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,8 +297,18 @@
 		847866EB2929A047000ABAA8 /* RecipeDetails */ = {
 			isa = PBXGroup;
 			children = (
+				847866EC2929A118000ABAA8 /* View */,
 			);
 			path = RecipeDetails;
+			sourceTree = "<group>";
+		};
+		847866EC2929A118000ABAA8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				847866ED2929A135000ABAA8 /* RecipeDetailsView.swift */,
+				847866EE2929A135000ABAA8 /* RecipeDetailsView.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		B74D2F1293A003C569D8EA35 /* Frameworks */ = {
@@ -368,6 +382,7 @@
 				847866962926D93A000ABAA8 /* LaunchScreen.storyboard in Resources */,
 				847866932926D93A000ABAA8 /* Assets.xcassets in Resources */,
 				847866BD29291609000ABAA8 /* RecipeView.xib in Resources */,
+				847866F02929A135000ABAA8 /* RecipeDetailsView.xib in Resources */,
 				847866C3292920B0000ABAA8 /* RecipeTabelViewCell.xib in Resources */,
 				847866DF29295EC4000ABAA8 /* HealthFiltterCollectionCell.xib in Resources */,
 			);
@@ -445,6 +460,7 @@
 				847866E729298334000ABAA8 /* SearchView+TableView.swift in Sources */,
 				847866E92929838A000ABAA8 /* RecipeView+CollectionView.swift in Sources */,
 				847866A02926DA18000ABAA8 /* APICleintProtocols.swift in Sources */,
+				847866EF2929A135000ABAA8 /* RecipeDetailsView.swift in Sources */,
 				847866CF2929233E000ABAA8 /* RecipesProtocol.swift in Sources */,
 				847866B52926DB60000ABAA8 /* ReusableUIView+Extension.swift in Sources */,
 				847866B12926DB30000ABAA8 /* UIImageView+Loader.swift in Sources */,

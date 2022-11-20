@@ -160,6 +160,10 @@ extension RecipeView: UISearchControllerDelegate {
 
 
 extension RecipeView :RecipesViewProtocol {
+    func goToRecipeDetails(vc: UIViewController) {
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
     func showLoadingIndicator() {
         activityIndicator.isHidden = false
