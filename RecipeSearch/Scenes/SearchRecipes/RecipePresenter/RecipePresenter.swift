@@ -33,7 +33,7 @@ class RecipePresenter{
 extension  RecipePresenter:RecipesPresenterProtocol,RecipesInteractorOutputProtocol {
     
     func selectRecipeCell(index: Int, RecipeId: Int) {
-        let vc = router.createModule2()
+        let vc = router.createNavigationToRecipeDetails()
         view?.goToRecipeDetails(vc: vc)
     }
     

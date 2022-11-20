@@ -30,15 +30,9 @@ class RecipesRouter{
 
 extension RecipesRouter :RecipesRouterProtocol {
     
-    func createModule2() -> UIViewController {
+    func createNavigationToRecipeDetails() -> UIViewController {
         let view = RecipeDetailsView()
-//        let recipesRepository = RecipesRepository(apiClient: APICleint.shared)
-//        let storge = searchStorge()
-//        let interactor = RecipesInteractor(repository: recipesRepository, storge: storge)
            let router = RecipesRouter()
-//           let presenter = RecipePresenter(view: view, interactor: interactor, router: router) // dependency injection constructor Base
-//           view.presenter = presenter // property base dependencyInjection
-//           interactor.presenter = presenter
            router.viewController = view
            return view
     }

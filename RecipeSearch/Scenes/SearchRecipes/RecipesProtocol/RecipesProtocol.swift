@@ -8,7 +8,7 @@
 import UIKit
 
 protocol RecipesRouterProtocol:AnyObject {
-    func createModule2() -> UIViewController
+    func createNavigationToRecipeDetails() -> UIViewController
 }
 
 // presenter Protocol
